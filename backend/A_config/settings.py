@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "app_core",
     "app_api",
     # External apps
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
