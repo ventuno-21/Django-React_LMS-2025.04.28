@@ -1,0 +1,11 @@
+how to install react with yarn:
+$ yarn create vite . --template react
+
+below command will install package we need;
+$ yarn
+
+Other packages that we would use, so we install them:
+$ yarn add axios
+
+
+======================================
