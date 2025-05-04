@@ -3,14 +3,12 @@ from django.template.loader import render_to_string
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 
-
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import generics, status, viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, APIView
-
 
 from app_api import serializers as api_serializer
 from app_account.models import User, Profile
@@ -55,8 +53,21 @@ class PasswordResetEmailVerifyAPIView(generics.RetrieveAPIView):
             user.save()
 
             link = f"http://localhost:5173/create-new-password/?otp={user.otp}&uuidb64={uuidb64}&refresh_token={refresh_token}"
-
             print("link ======", link)
+
+            context = {"link": link, "username": user.username}
+            subject = "Reset password on Ventuno LMS"
+            text_body = render_to_string("email/password-reset.txt", context)
+            html_body = render_to_string("email/password-reset.html", context)
+            msg = EmailMultiAlternatives(
+                subject=subject,
+                from_email=settings.EMAIL_HOST_USER,
+                to=[user.email],
+                body=text_body,
+            )
+            msg.attach_alternative(html_body, "text/html")
+            msg.send()
+
         return user
 
 
