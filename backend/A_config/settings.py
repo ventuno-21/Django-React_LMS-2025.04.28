@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "app_core",
     "app_api",
     # External apps
+    "drf_yasg",
     "rest_framework",
     "rest_framework_simplejwt.token_blacklist",
     "corsheaders",

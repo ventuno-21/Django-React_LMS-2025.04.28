@@ -45,6 +45,7 @@ class PasswordResetEmailVerifyAPIView(generics.RetrieveAPIView):
 
         if user:
             uuidb64 = user.pk
+            # Generate new access token with RefereshToken
             refresh = RefreshToken.for_user(user)
             refresh_token = str(refresh.access_token)
 
