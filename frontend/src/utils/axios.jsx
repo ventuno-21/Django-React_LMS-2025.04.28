@@ -1,7 +1,7 @@
 import axios from "axios";
 import { setAuthUser, getRefreshToken, isAccessTokenExpired } from "./auth";
 import Cookie from "js-cookie";
-
+import { API_BASE_URL } from "./constants";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL
 
